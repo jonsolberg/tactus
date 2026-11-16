@@ -1,0 +1,8 @@
+
+(simulator:3406): dbind-WARNING **: 10:55:55.272: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+10:56:20: Debug: Adding duplicate image handler for 'JPEG file'
+10:56:20: Debug: SetLayout
+sim window: 2097153
+Window 2097153
+  Position: 10,10 (screen: 0)
+  Geometry: 10x10
