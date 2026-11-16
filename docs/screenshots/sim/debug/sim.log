@@ -1,5 +1,6 @@
 
-(simulator:3491): dbind-WARNING **: 10:58:16.122: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
-10:58:41: Debug: Adding duplicate image handler for 'JPEG file'
-10:58:41: Debug: SetLayout
+(simulator:3345): dbind-WARNING **: 11:01:00.401: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+11:01:25: Debug: Adding duplicate image handler for 'JPEG file'
+11:01:25: Debug: SetLayout
+connected on try 1
 connected on try 1
