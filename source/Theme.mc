@@ -23,8 +23,7 @@ module Theme {
     function apply() {
         var m;
         if (Prefs.display == Prefs.DISPLAY_AUTO) {
-            var def = WatchUi.loadResource(Rez.Strings.ThemeDefault);
-            m = def.equals("mono");
+            m = (WatchUi.loadResource(Rez.JsonData.MonoDisplay) == true);
         } else {
             m = (Prefs.display == Prefs.DISPLAY_MONO);
         }

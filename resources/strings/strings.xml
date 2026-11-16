@@ -1,10 +1,6 @@
 <strings>
     <string id="AppName">Tactus</string>
 
-    <!-- "color" or "mono". Overridden to "mono" for black-and-white watches
-         in resources-mono. Not translated. -->
-    <string id="ThemeDefault">color</string>
-
     <string id="Bpm">BPM</string>
     <string id="Bar">Bar</string>
     <string id="VibrationOff">Vibration is off</string>

@@ -1,0 +1,4 @@
+<resources>
+    <!-- true on black-and-white watches (overridden in resources-mono) -->
+    <jsonData id="MonoDisplay">false</jsonData>
+</resources>
