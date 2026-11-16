@@ -1,0 +1,83 @@
+# Tactus - take store screenshots in the Connect IQ simulator
+# Copyright (C) 2026 Jon Solberg - GPL v3 or later, see LICENSE.
+#
+# Runs the app in the simulator on a virtual screen and commits the
+# captures to docs/screenshots/sim/. Runs when this file or
+# tools/screenshots.sh changes, or by hand.
+
+name: Screenshots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/screenshots.yml
+      - tools/screenshots.sh
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  shots:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: System packages for the simulator
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb xdotool imagemagick libwebkit2gtk-4.0-37 libusb-1.0-0 libsm6 libgtk-3-0 > /dev/null
+
+      - name: Install Connect IQ SDK manager (CLI)
+        run: |
+          curl -s https://raw.githubusercontent.com/lindell/connect-iq-sdk-manager-cli/master/install.sh | sh -s -- -b "$HOME/.local/bin"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Download SDK, devices and fonts
+        env:
+          GARMIN_USERNAME: ${{ secrets.GARMIN_USERNAME }}
+          GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
+        run: |
+          connect-iq-sdk-manager agreement accept
+          connect-iq-sdk-manager login
+          connect-iq-sdk-manager sdk set ">=8.0.0"
+          echo "$(connect-iq-sdk-manager sdk current-path --bin)" >> "$GITHUB_PATH"
+          connect-iq-sdk-manager device download -d fenix7 -d instinct2 --include-fonts
+
+      - name: Developer key
+        env:
+          KEY_B64: ${{ secrets.CIQ_DEVELOPER_KEY_B64 }}
+        run: echo "$KEY_B64" | base64 -d > "$RUNNER_TEMP/developer_key.der"
+
+      - name: Build
+        run: |
+          mkdir -p dist
+          monkeyc -d fenix7 -f monkey.jungle -o dist/fenix7.prg -y "$RUNNER_TEMP/developer_key.der" -w
+          monkeyc -d instinct2 -f monkey.jungle -o dist/instinct2.prg -y "$RUNNER_TEMP/developer_key.der" -w
+          rm -f "$RUNNER_TEMP/developer_key.der"
+
+      - name: Take screenshots
+        run: bash tools/screenshots.sh
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: shots/
+
+      - name: Commit screenshots
+        run: |
+          mkdir -p docs/screenshots/sim
+          cp shots/*.png docs/screenshots/sim/
+          git config user.name "Jon Solberg"
+          git config user.email "jonsolberg@users.noreply.github.com"
+          git add docs/screenshots/sim
+          git commit -m "Simulator screenshots" || echo "nothing to commit"
+          git pull --rebase
+          git push
