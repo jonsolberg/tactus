@@ -14,6 +14,8 @@ Made for the Garmin fenix 7, and it also runs on most Connect IQ watches from th
   <img src="docs/screenshots/fenix7-six-eight.png" width="240" alt="6/8 time">
 </p>
 
+> **Connect IQ Store:** Tactus is submitted and waiting for Garmin's review. Until it's published, install it by copying the `.prg` file to the watch – see [docs/INSTALL.md](docs/INSTALL.md).
+
 ## Features
 
 - **Vibrating pulse** on every beat, with a stronger, longer buzz on beat 1
