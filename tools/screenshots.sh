@@ -4,7 +4,8 @@
 set -u
 mkdir -p shots
 export DISPLAY=:99
-Xvfb :99 -screen 0 1600x1000x24 >/dev/null 2>&1 &
+export LIBGL_ALWAYS_SOFTWARE=1
+Xvfb :99 -screen 0 1600x1000x24 +extension GLX +render -noreset >/dev/null 2>&1 &
 sleep 3
 SDKBIN="$(connect-iq-sdk-manager sdk current-path --bin)"
 ls "$SDKBIN" > shots/sdkbin.txt
@@ -15,7 +16,7 @@ snap() { import -window root "shots/$1.png"; xdotool search --name "" getwindown
 
 # fenix 7
 monkeydo dist/fenix7.prg fenix7 > shots/monkeydo-fenix7.log 2>&1 &
-sleep 20
+sleep 30
 snap 01-fenix7-start
 WIN=$(xdotool search --name "Simulator" | head -1)
 echo "sim window: $WIN" >> shots/sim.log
