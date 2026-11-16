@@ -45,11 +45,10 @@ Made for the Garmin fenix 7, and it also runs on most Connect IQ watches from th
 <p align="center">
   <img src="docs/screenshots/fenix7-menu.png" width="240" alt="Settings menu">
   <img src="docs/screenshots/fenix7-tap-tempo.png" width="240" alt="Tap tempo">
-  <img src="docs/screenshots/fenix7-bw.png" width="240" alt="Black-and-white mode on a fenix 7">
 </p>
 
 <p align="center">
-  <img src="docs/screenshots/instinct2-mono.png" width="200" alt="Instinct 2 (black and white)"><br>
+  <img src="docs/screenshots/instinct2-mono.png" width="260" alt="Instinct 2 (black and white)"><br>
   <em>On the Instinct 2 the time signature sits in the round sub-screen.</em>
 </p>
 
