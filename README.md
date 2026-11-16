@@ -90,13 +90,13 @@ Other Connect IQ 3.1+ watches will most likely work too. Add them in VS Code wit
 - If you see *Vibration is off*, turn vibration back on in the watch's own settings (under *System → Sounds & Alerts* on the fenix 7).
 - Tactus is a watch app, so it keeps running while it's on screen. Press BACK to stop and leave.
 
-## Building and publishing
+## Building
 
 On Windows, the quickest route is the build script. It finds the SDK you picked in the SDK Manager:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
-.\build.ps1 -Key C:\path\to\developer_key.der           # .prg for fenix 7 + .iq for the store
+.\build.ps1 -Key C:\path\to\developer_key.der           # .prg for fenix 7
 .\build.ps1 -Key ...\developer_key.der -Device instinct2 -PrgOnly
 ```
 
@@ -108,9 +108,6 @@ monkeyc -d fenix7 -f monkey.jungle -o bin/Tactus.prg -y /path/to/developer_key.d
 connectiq &
 monkeydo bin/Tactus.prg fenix7
 ```
-
-To export a package for the Connect IQ Store (all devices): **Monkey C: Export Project** in VS Code, or
-`monkeyc -e -f monkey.jungle -o bin/Tactus.iq -y developer_key.der -r`.
 
 ## Project layout
 
@@ -131,8 +128,8 @@ source/
 resources/                English strings, colour icon
 resources-swe/            Swedish strings
 resources-mono/           black-and-white theme default and icon
-build.ps1                 Windows build script (.prg + store .iq)
-docs/                     install guide, store guide, screenshots
+build.ps1                 Windows build script
+docs/                     install guide, screenshots
 ```
 
 ## Support
