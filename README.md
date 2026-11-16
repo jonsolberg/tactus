@@ -73,7 +73,10 @@ Other Connect IQ 3.1+ watches will most likely work too. Add them in VS Code wit
 
 **Other watches:** build it yourself. See **[docs/INSTALL.md](docs/INSTALL.md)** for full step-by-step instructions. In short:
 
-1. Install VS Code, the Garmin **Monkey C** extension and the **Connect IQ SDK** (via the SDK Manager), and download the device files for your watch.
+1. Install the tools:
+   - [VS Code](https://code.visualstudio.com/).
+   - The Garmin [**Monkey C** extension](https://marketplace.visualstudio.com/items?itemName=garmin.monkey-c): in VS Code, open Extensions (Ctrl+Shift+X) and search for *Monkey C*.
+   - The **Connect IQ SDK Manager** from Garmin's developer site: <https://developer.garmin.com/connect-iq/sdk/>. Run it and sign in with your Garmin account. Under **SDKs**, download the latest SDK and set it as current. Under **Devices**, download the files for your watch (e.g. fēnix 7).
 2. Create a developer key: **Monkey C: Generate a Developer Key**.
 3. Build: **Monkey C: Build for Device** → pick your watch (e.g. `fenix7`). This produces `Tactus.prg`.
 4. Connect the watch with USB and copy `Tactus.prg` to the watch's **`GARMIN/APPS`** folder.
