@@ -1,0 +1,90 @@
+# Tactus - build on GitHub
+# Copyright (C) 2026 Jon Solberg - GPL v3 or later, see LICENSE.
+#
+# Every push to main builds Tactus for the fenix 7 and exports the store
+# package (.iq) for all watches in manifest.xml. Both end up as artifacts
+# on the workflow run. Pushing a tag like v1.0.0 also creates a GitHub
+# Release with the files attached.
+#
+# Needs three repository secrets (Settings -> Secrets and variables -> Actions):
+#   GARMIN_USERNAME        Garmin account e-mail (for the SDK and device files)
+#   GARMIN_PASSWORD        Garmin account password
+#   CIQ_DEVELOPER_KEY_B64  the developer key (developer_key.der), base64 encoded
+
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install Connect IQ SDK manager (CLI)
+        run: |
+          curl -s https://raw.githubusercontent.com/lindell/connect-iq-sdk-manager-cli/master/install.sh | sh -s -- -b "$HOME/.local/bin"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Download SDK and device files
+        env:
+          GARMIN_USERNAME: ${{ secrets.GARMIN_USERNAME }}
+          GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
+        run: |
+          connect-iq-sdk-manager agreement accept
+          connect-iq-sdk-manager login
+          connect-iq-sdk-manager sdk set ">=8.0.0"
+          echo "$(connect-iq-sdk-manager sdk current-path --bin)" >> "$GITHUB_PATH"
+          connect-iq-sdk-manager device download --manifest=manifest.xml
+
+      - name: Developer key
+        env:
+          KEY_B64: ${{ secrets.CIQ_DEVELOPER_KEY_B64 }}
+        run: |
+          if [ -z "$KEY_B64" ]; then echo "::error::Secret CIQ_DEVELOPER_KEY_B64 is missing"; exit 1; fi
+          echo "$KEY_B64" | base64 -d > "$RUNNER_TEMP/developer_key.der"
+
+      - name: Build fenix 7 (.prg)
+        run: |
+          mkdir -p dist
+          monkeyc -d fenix7 -f monkey.jungle -o dist/Tactus-fenix7.prg -y "$RUNNER_TEMP/developer_key.der" -r -w
+
+      - name: Build Instinct 2 (.prg)
+        run: |
+          monkeyc -d instinct2 -f monkey.jungle -o dist/Tactus-instinct2.prg -y "$RUNNER_TEMP/developer_key.der" -r -w
+
+      - name: Export store package (.iq)
+        run: |
+          monkeyc -e -f monkey.jungle -o dist/Tactus.iq -y "$RUNNER_TEMP/developer_key.der" -r -w
+
+      - name: Clean up key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/developer_key.der"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tactus-${{ github.sha }}
+          path: |
+            dist/*.prg
+            dist/*.iq
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/Tactus-fenix7.prg dist/Tactus-instinct2.prg dist/Tactus.iq \
+            --title "Tactus $GITHUB_REF_NAME" \
+            --notes "Tactus.iq is the package for the Connect IQ Store. The .prg files can be copied straight to the watch's GARMIN/APPS folder (see docs/INSTALL.md)."
