@@ -1,0 +1,34 @@
+<strings>
+    <string id="AppName">Tactus</string>
+
+    <!-- "color" or "mono". Overridden to "mono" for black-and-white watches
+         in resources-mono. Not translated. -->
+    <string id="ThemeDefault">color</string>
+
+    <string id="Bpm">BPM</string>
+    <string id="Bar">Bar</string>
+    <string id="VibrationOff">Vibration is off</string>
+
+    <string id="MenuTitle">Tactus</string>
+    <string id="Tempo">Tempo</string>
+    <string id="TapTempo">Tap tempo</string>
+    <string id="TimeSignature">Time signature</string>
+    <string id="Accent">Accent</string>
+    <string id="AccentSub">Stronger buzz on beat 1</string>
+    <string id="Pulse">Pulse</string>
+    <string id="Vibrate">Vibrate</string>
+    <string id="Beep">Beep</string>
+    <string id="Both">Vibrate + beep</string>
+    <string id="Strength">Vibration strength</string>
+    <string id="Light">Light</string>
+    <string id="Medium">Medium</string>
+    <string id="Strong">Strong</string>
+    <string id="Display">Display</string>
+    <string id="Auto">Auto</string>
+    <string id="Color">Color</string>
+    <string id="Mono">Black and white</string>
+
+    <string id="TapHint">Tap START</string>
+    <string id="TapHint2">in time</string>
+    <string id="TapSave">BACK saves</string>
+</strings>

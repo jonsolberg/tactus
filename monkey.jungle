@@ -1,0 +1,9 @@
+# Tactus - build configuration
+project.manifest = manifest.xml
+
+# Black-and-white watches get the monochrome theme and icon on top of the
+# normal resources. Colour watches use the default resources only.
+instinct2.resourcePath = $(instinct2.resourcePath);resources-mono
+instinct2s.resourcePath = $(instinct2s.resourcePath);resources-mono
+instinct2x.resourcePath = $(instinct2x.resourcePath);resources-mono
+instinctcrossover.resourcePath = $(instinctcrossover.resourcePath);resources-mono

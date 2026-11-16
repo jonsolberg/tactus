@@ -1,0 +1,4 @@
+<strings>
+    <!-- Black-and-white watches start in the monochrome theme. -->
+    <string id="ThemeDefault">mono</string>
+</strings>

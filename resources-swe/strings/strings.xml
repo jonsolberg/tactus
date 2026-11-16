@@ -1,0 +1,30 @@
+<strings>
+    <string id="AppName">Tactus</string>
+
+    <string id="Bpm">BPM</string>
+    <string id="Bar">Takt</string>
+    <string id="VibrationOff">Vibration är av</string>
+
+    <string id="MenuTitle">Tactus</string>
+    <string id="Tempo">Tempo</string>
+    <string id="TapTempo">Knacka tempo</string>
+    <string id="TimeSignature">Taktart</string>
+    <string id="Accent">Betoning</string>
+    <string id="AccentSub">Starkare surr på slag 1</string>
+    <string id="Pulse">Puls</string>
+    <string id="Vibrate">Vibration</string>
+    <string id="Beep">Pip</string>
+    <string id="Both">Vibration + pip</string>
+    <string id="Strength">Vibrationsstyrka</string>
+    <string id="Light">Svag</string>
+    <string id="Medium">Mellan</string>
+    <string id="Strong">Stark</string>
+    <string id="Display">Skärm</string>
+    <string id="Auto">Auto</string>
+    <string id="Color">Färg</string>
+    <string id="Mono">Svartvit</string>
+
+    <string id="TapHint">Tryck START</string>
+    <string id="TapHint2">i takt</string>
+    <string id="TapSave">BACK sparar</string>
+</strings>
