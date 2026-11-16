@@ -3,8 +3,8 @@
 #
 # Every push to main builds Tactus for the fenix 7 and exports the store
 # package (.iq) for all watches in manifest.xml. Both end up as artifacts
-# on the workflow run. Pushing a tag like v1.0.0 also creates a GitHub
-# Release with the files attached.
+# on the workflow run. Publishing a release (or pushing a tag like v1.0.0)
+# attaches the files to that GitHub Release.
 #
 # Needs three repository secrets (Settings -> Secrets and variables -> Actions):
 #   GARMIN_USERNAME        Garmin account e-mail (for the SDK and device files)
@@ -17,6 +17,8 @@ on:
   push:
     branches: [main]
     tags: ["v*"]
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -85,6 +87,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" dist/Tactus-fenix7.prg dist/Tactus-instinct2.prg dist/Tactus.iq \
-            --title "Tactus $GITHUB_REF_NAME" \
-            --notes "Tactus.iq is the package for the Connect IQ Store. The .prg files can be copied straight to the watch's GARMIN/APPS folder (see docs/INSTALL.md)."
+          TAG="${GITHUB_REF_NAME}"
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --title "Tactus $TAG" \
+              --notes "Tactus.iq is the package for the Connect IQ Store. The .prg files can be copied straight to the watch's GARMIN/APPS folder (see docs/INSTALL.md)."
+          fi
+          gh release upload "$TAG" dist/Tactus-fenix7.prg dist/Tactus-instinct2.prg dist/Tactus.iq --clobber
