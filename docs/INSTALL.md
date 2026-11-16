@@ -1,6 +1,14 @@
 # Installing Tactus on your Garmin watch
 
-Tactus isn't in the Connect IQ Store (yet), so you build it yourself and copy it to the watch. You only need to do steps 1–2 once.
+## Quick install (fēnix 7 or Instinct 2)
+
+Download a ready-made file from the [latest release](https://github.com/jonsolberg/tactus/releases/latest), either **Tactus-fenix7.prg** or **Tactus-instinct2.prg**. Then skip to [step 6](#6-copy-it-to-the-watch) and copy it to the watch.
+
+The build must match your watch model exactly. For any other watch, build it yourself as described below.
+
+## Building it yourself
+
+Tactus isn't in the Connect IQ Store (yet), so for other watches you build it yourself and copy it to the watch. You only need to do steps 1–2 once.
 
 ## 1. Install the tools (once)
 
