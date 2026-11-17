@@ -14,7 +14,7 @@ Made for the Garmin fenix 7, and it also runs on most Connect IQ watches from th
   <img src="docs/screenshots/fenix7-six-eight.png" width="240" alt="6/8 time">
 </p>
 
-> **Connect IQ Store:** Tactus is submitted and waiting for Garmin's review. Until it's published, install it by copying the `.prg` file to the watch – see [docs/INSTALL.md](docs/INSTALL.md).
+> **Get it on the [Connect IQ Store](https://apps.garmin.com/apps/4fb22149-d95c-454f-a482-f644301c5345)** – install it from the Connect IQ app on your phone, or on the web.
 
 ## Features
 
@@ -69,7 +69,9 @@ Other Connect IQ 3.1+ watches will most likely work too. Add them in VS Code wit
 
 ## Installation
 
-**fēnix 7 or Instinct 2:** download `Tactus-fenix7.prg` or `Tactus-instinct2.prg` from the [latest release](https://github.com/jonsolberg/tactus/releases/latest). Connect the watch with USB and copy the file to its `GARMIN/APPS` folder. That's it.
+**Easiest:** install Tactus from the [Connect IQ Store](https://apps.garmin.com/apps/4fb22149-d95c-454f-a482-f644301c5345).
+
+**Without the store (fēnix 7 or Instinct 2):** download `Tactus-fenix7.prg` or `Tactus-instinct2.prg` from the [latest release](https://github.com/jonsolberg/tactus/releases/latest). Connect the watch with USB and copy the file to its `GARMIN/APPS` folder. That's it.
 
 **Other watches:** build it yourself. See **[docs/INSTALL.md](docs/INSTALL.md)** for full step-by-step instructions. In short:
 
