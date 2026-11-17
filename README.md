@@ -135,9 +135,9 @@ docs/                     install guide, screenshots
 ## Support
 
 Tactus is free, open source and has no ads. If you enjoy it, you can
-[buy me a beer on Ko-fi](https://ko-fi.com/jonsolberg) 🍺
+[support me on Ko-fi](https://ko-fi.com/jonsolberg) ❤️
 
-[![Buy me a beer on Ko-fi](https://img.shields.io/badge/Ko--fi-buy%20me%20a%20beer-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/jonsolberg)
+[![Support me on Ko-fi](https://img.shields.io/badge/Ko--fi-support%20me-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/jonsolberg)
 
 ## License
 
